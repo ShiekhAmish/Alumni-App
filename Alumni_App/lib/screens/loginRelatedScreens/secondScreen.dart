@@ -109,11 +109,11 @@ class _SecondScreenState extends State<SecondScreen> {
                       style: TextStyle(fontSize: 16, color: Colors.black),
                       validator: (value) {
                         if (_branch.text.length < 3)
-                          return "branch name must be atleast 2 characters long";
+                          return "Blood Group must be atleast 2 characters long";
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: "Branch",
+                        hintText: "Blood Group",
                         hintStyle:
                             TextStyle(fontSize: 16, color: Colors.grey[900]),
                         filled: true,

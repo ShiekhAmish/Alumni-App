@@ -61,7 +61,8 @@ class FirebaseMethods {
     String _imageUrl;
 
     _uploadTask = _storage.ref().child(_filePath).putFile(file);
-    TaskSnapshot taskSnapshot = await _uploadTask.whenComplete(() => null);
+
+    TaskSnapshot taskSnapshot = await _uploadTask.whenComplete(() => Post());
 
     // Waits till the file is uploaded then stores the download url
     await taskSnapshot.ref.getDownloadURL().then((value) {
