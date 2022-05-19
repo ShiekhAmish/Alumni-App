@@ -108,7 +108,7 @@ class _SecondScreenState extends State<SecondScreen> {
                       keyboardType: TextInputType.emailAddress,
                       style: TextStyle(fontSize: 16, color: Colors.black),
                       validator: (value) {
-                        if (_branch.text.length < 3)
+                        if (_branch.text.length < 2)
                           return "Blood Group must be atleast 2 characters long";
                         return null;
                       },

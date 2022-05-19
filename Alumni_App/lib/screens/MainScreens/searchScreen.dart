@@ -34,7 +34,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         (element.data()['name'].toString().toUpperCase())
                             .contains(_controller.text.toUpperCase()) ||
                         (element.data()['rollNumber'].toString().toUpperCase())
-                            .contains(_controller.text.toUpperCase()))
+                            .contains(_controller.text.toUpperCase()) ||
+                    (element.data()['branch'].toString().toUpperCase())
+                        .contains(_controller.text.toUpperCase()))
                     .toList();
                 if (_controller.text.length == 0) _smallList = [];
               },
