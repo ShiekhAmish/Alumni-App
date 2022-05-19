@@ -51,7 +51,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 5),
               child: TextField(
-                
+
                 style: TextStyle( fontSize: 20),
                 controller: _controller,
                 cursorColor: Colors.white,
@@ -95,7 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       senderId: currentUser.uid,
                       text: _text),
                 );
-                    
+
               }
             },
           ),
@@ -103,7 +103,32 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
+  _bottomContainer2() {
+    return Container(
+      margin: EdgeInsets.only(
+          left: 10,
+          right:10,
+          bottom: 10
+      ),
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      color: UniversalVariables.separatorColor,
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 5),
+              child: Text('Only Admin Can Send Message', textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.grey),
+              ),
 
+            ),
+          ),
+
+        ],
+      ),
+    );
+  }
   _messageContainer() {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
@@ -196,7 +221,11 @@ class _ChatScreenState extends State<ChatScreen> {
             child: _messageContainer(),
             ),
           ),
-          _bottomContainer(),
+          Container(
+            child:(currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532')
+                ? _bottomContainer()
+                : _bottomContainer2()
+          ),
         ],
       ),
     );

@@ -106,7 +106,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 subtitle: Text(
                   _smallList[index]
-                      .data()['rollNumber']
+                      .data()['branch']
                       .toString()
                       .toUpperCase(),
                   style: TextStyle(color: Colors.white, fontSize: 16),
