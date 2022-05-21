@@ -13,7 +13,10 @@ class AddPost extends StatefulWidget {
   _AddPostState createState() => _AddPostState();
 }
 
+
 class _AddPostState extends State<AddPost> {
+
+  User currentUser;
   File _image;
   ImagePicker _picker;
   TextEditingController _textController = new TextEditingController();
@@ -23,6 +26,7 @@ class _AddPostState extends State<AddPost> {
   var uid;
 
   initState() {
+    currentUser = _repository.getCurrentUser();
     _picker = ImagePicker();
     shouldIRotate = false;
     uid = Uuid();
@@ -205,23 +209,60 @@ class _AddPostState extends State<AddPost> {
       ),
     );
   }
+adminpost()
+{
+  return SingleChildScrollView(
+    child: Column(
+      children: [
 
+        if (_image != null) imageContainer(),
+        textContainer(),
+        if (_image == null) buttonContainer(),
+      ],
+    ),
+  );
+}
+  notpost()
+  {
+    return Container(
+      margin: EdgeInsets.only(
+          left: 10,
+          right:10,
+          bottom: 10
+      ),
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      color: UniversalVariables.separatorColor,
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 5),
+              child: Text('Only Admin Can Make Posts', textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.blueAccent),
+              ),
+
+            ),
+          ),
+
+        ],
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appbar(),
       backgroundColor: UniversalVariables.separatorColor,
-      body: Stack(
+      body: Column(
         children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                if (_image != null) imageContainer(),
-                textContainer(),
-                if (_image == null) buttonContainer(),
-              ],
-            ),
-          ),
+         Column(
+             children: [
+               (currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532')
+                   ? adminpost()
+                   : notpost(),
+             ],
+         ),
           // if (shouldIRotate == true)
           //   Container(
           //     height: MediaQuery.of(context).size.height,

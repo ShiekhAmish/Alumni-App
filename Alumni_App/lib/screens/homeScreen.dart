@@ -7,7 +7,7 @@ import 'package:alumni/screens/MainScreens/userProfile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class HomeScreen extends StatefulWidget {
   final List<QueryDocumentSnapshot>list;
   HomeScreen(this.list);
@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  User currentUser;
   final PageController _pageController = PageController();
   List<QueryDocumentSnapshot>list;
   _HomeScreenState(this.list);

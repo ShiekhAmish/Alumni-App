@@ -44,7 +44,7 @@ class _LogInState extends State<LogIn> {
                         baseColor: Colors.white,
                         highlightColor: Colors.lightBlue,
                         child: Text(
-                          'Alumni',
+                          'Sign In',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 60.0,
