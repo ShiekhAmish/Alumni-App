@@ -124,37 +124,37 @@ class _SignUpState extends State<SignUp> {
                               return null;
                             },
                           ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintText: "Password",
-                              hintStyle:
-                              TextStyle(color: Colors.black, fontSize: 16),
-                              filled: true,
-                              fillColor: Colors.white,
-                              contentPadding: EdgeInsets.all(10),
-                              border: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(10.0),
-                                borderSide: new BorderSide(),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                            obscureText: true,
-                            controller: _password,
-                            keyboardType: TextInputType.emailAddress,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                            validator: (value) {
-                              if (_password.text.length < 6) {
-                                return 'Password length must be greater than 6 characters';
-                              }
-                              return null;
-                            },
-                          ),
+                          // TextFormField(
+                          //   decoration: InputDecoration(
+                          //     hintText: "Password",
+                          //     hintStyle:
+                          //     TextStyle(color: Colors.black, fontSize: 16),
+                          //     filled: true,
+                          //     fillColor: Colors.white,
+                          //     contentPadding: EdgeInsets.all(10),
+                          //     border: new OutlineInputBorder(
+                          //       borderRadius: new BorderRadius.circular(10.0),
+                          //       borderSide: new BorderSide(),
+                          //     ),
+                          //     focusedBorder: OutlineInputBorder(
+                          //       borderSide: BorderSide(color: Colors.blue),
+                          //       borderRadius: BorderRadius.circular(10.0),
+                          //     ),
+                          //   ),
+                          //   obscureText: true,
+                          //   controller: _password,
+                          //   keyboardType: TextInputType.emailAddress,
+                          //   style: TextStyle(
+                          //     color: Colors.black,
+                          //     fontSize: 16,
+                          //   ),
+                          //   validator: (value) {
+                          //     if (_password.text.length < 6) {
+                          //       return 'Password length must be greater than 6 characters';
+                          //     }
+                          //     return null;
+                          //   },
+                          // ),
                           SizedBox(
                             height: 15,
                           ),
