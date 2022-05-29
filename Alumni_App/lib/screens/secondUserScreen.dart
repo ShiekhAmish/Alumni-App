@@ -10,7 +10,7 @@ class SecondUserProfilePage extends StatefulWidget {
   final DocumentSnapshot qds;
   SecondUserProfilePage(this.qds);
   @override
-  _SecondUserProfilePageState createState() => _SecondUserProfilePageState();
+  _SecondUserProfilePageState createState() => _SecondUserProfilePageState(qds);
 }
 
 class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
@@ -48,6 +48,12 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
                   ),
                 );
               
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.delete, color: Colors.white),
+            onPressed: () {
+              _showDialog();
             },
           ),
         ],

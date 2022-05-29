@@ -28,10 +28,11 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       // home: OtpScreen(_list),
 
-        home:  _repositories.getCurrentUser() != null &&_repositories.getCurrentUser().emailVerified? HomeScreen(_list):SignUp() ,
+        home:  _repositories.getCurrentUser() != null &&_repositories.getCurrentUser().emailVerified? HomeScreen(_list):LogIn() ,
       routes: {
-        'signUp': (context) => SignUp(),
         'signIn': (context) => LogIn(),
+        'signUp': (context) => SignUp(),
+
       },
     );
   }

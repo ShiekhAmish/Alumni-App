@@ -37,7 +37,7 @@ class FirebaseRepos
    Future<List<QueryDocumentSnapshot>> getUserPosts(String uid)=>_methods.getUserPosts(uid);
 
    Future<void> deletePost(String id)=> _methods.deletePost(id);
-
+  Future<void> deleteUser(String uid)=> _methods.deleteUser(uid);
    Future<void> addMessage(String sender, String receiver, Message message)=>_methods.addMessage(sender, receiver, message);
 
    Future<void> updateUserInfo(String name, String course, String branch,

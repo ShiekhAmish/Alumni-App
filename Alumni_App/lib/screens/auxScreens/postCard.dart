@@ -46,7 +46,7 @@ class _PostCardState extends State<PostCard> {
           Container(
             padding: EdgeInsets.fromLTRB(5, 0, 0, 3),
             child: Text(
-              widget.qds.data()['branch'].toString().toUpperCase(),
+              widget.qds.data()['tag'].toString().toUpperCase(),
               style: TextStyle(fontSize: 14, color: Colors.grey),
               overflow: TextOverflow.ellipsis,
             ),

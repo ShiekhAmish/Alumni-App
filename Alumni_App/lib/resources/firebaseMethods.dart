@@ -172,7 +172,9 @@ class FirebaseMethods {
   Future<void> deletePost(String id) async {
     return await firestore.collection('posts').doc(id).delete();
   }
-
+  Future<void> deleteUser(String uid) async {
+    return await firestore.collection('users').doc(uid).delete();
+  }
   Future<void> addMessage(
       String sender, String receiver, Message message) async {
     await firestore
