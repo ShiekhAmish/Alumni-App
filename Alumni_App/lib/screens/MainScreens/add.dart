@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:alumni/modals.dart/posts.dart';
 import 'package:alumni/modals.dart/universalVariables.dart';
+import 'package:alumni/screens/auxScreens/mainChatScreen.dart';
+import 'package:alumni/screens/secondUserScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -225,28 +227,31 @@ adminpost()
   notpost()
   {
     return Container(
-      margin: EdgeInsets.only(
-          left: 10,
-          right:10,
-          bottom: 10
-      ),
-      height: 60,
-      width: MediaQuery.of(context).size.width,
-      color: UniversalVariables.separatorColor,
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 5),
-              child: Text('Only Admin Can Make Posts', textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.blueAccent),
-              ),
 
-            ),
-          ),
 
-        ],
-      ),
+
+      // margin: EdgeInsets.only(
+      //     left: 10,
+      //     right:10,
+      //     bottom: 10
+      // ),
+      // height: 60,
+      // width: MediaQuery.of(context).size.width,
+      // color: UniversalVariables.separatorColor,
+      // child: Row(
+      //   children: [
+      //     Expanded(
+      //       child: Container(
+      //         margin: EdgeInsets.symmetric(vertical: 5),
+      //         child: Text('Only Admin Can Make Posts', textAlign: TextAlign.center,
+      //           style: TextStyle(color: Colors.blueAccent),
+      //         ),
+      //
+      //       ),
+      //     ),
+      //
+      //   ],
+      // ),
     );
   }
   @override
@@ -260,7 +265,7 @@ adminpost()
              children: [
                (currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532')
                    ? adminpost()
-                   : notpost(),
+                   : SecondChatScreen(),
              ],
          ),
           // if (shouldIRotate == true)

@@ -5,19 +5,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ChatScreen extends StatefulWidget {
-  final QueryDocumentSnapshot qds;
-  ChatScreen(this.qds);
+class SecondChatScreen extends StatefulWidget {
+
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  _SecondChatScreenState createState() => _SecondChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _SecondChatScreenState extends State<SecondChatScreen> {
   FirebaseRepos _repository = FirebaseRepos();
   TextEditingController _controller = new TextEditingController();
 
   User currentUser;
-
+DocumentSnapshot userData;
   initState() {
     currentUser = _repository.getCurrentUser();
     super.initState();
@@ -29,80 +28,12 @@ class _ChatScreenState extends State<ChatScreen> {
       backgroundColor: UniversalVariables.separatorColor,
       centerTitle: true,
       title: Text(
-        widget.qds.data()['name'],
+        "${userData.data()['tag'].toString().toUpperCase()} ${userData.data()['name'].toString().toUpperCase()}",
         overflow: TextOverflow.ellipsis,
       ),
     );
   }
 
-  _bottomContainer() {
-    return Container(
-      margin: EdgeInsets.only(
-        left: 10,
-        right:10,
-        bottom: 10
-      ),
-      height: 60,
-      width: MediaQuery.of(context).size.width,
-      color: UniversalVariables.separatorColor,
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 5),
-              child: TextField(
-
-                style: TextStyle( fontSize: 20),
-                controller: _controller,
-                cursorColor: Colors.white,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(15)
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.send,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              if (_controller.text.length == 0 ||
-                  _controller.text.trim() == "") {
-              } else {
-                String _text=_controller.text;
-                setState(() {
-                _controller.clear();
-                });
-                _repository
-                    .addMessage(
-                  widget.qds.data()['uid'],
-                  _repository.getCurrentUser().uid,
-                  Message(
-                      date: DateTime.now(),
-                      receiverId: widget.qds.data()['uid'],
-                      senderId: currentUser.uid,
-                      text: _text),
-                );
-
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
   _bottomContainer2() {
     return Container(
       margin: EdgeInsets.only(
@@ -155,7 +86,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 });
                 _repository
                     .addMessage(
-                  widget.qds.data()['uid'],
+                  " ${userData.data()['uid'].toString().toUpperCase()}",
                   _repository.getCurrentUser().uid,
                   Message(
                       date: DateTime.now(),
@@ -209,7 +140,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Container(
       margin: EdgeInsets.only(top: 12),
       constraints:
-          BoxConstraints(maxWidth: MediaQuery.of(context).size.width * .60),
+      BoxConstraints(maxWidth: MediaQuery.of(context).size.width * .60),
       decoration: BoxDecoration(
         color: UniversalVariables.senderColor,
         borderRadius: BorderRadius.only(
@@ -232,7 +163,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Container(
       margin: EdgeInsets.only(top: 12),
       constraints:
-          BoxConstraints(maxWidth: MediaQuery.of(context).size.width * .60),
+      BoxConstraints(maxWidth: MediaQuery.of(context).size.width * .60),
       decoration: BoxDecoration(
         color: UniversalVariables.receiverColor,
         borderRadius: BorderRadius.only(
@@ -260,13 +191,11 @@ class _ChatScreenState extends State<ChatScreen> {
           Expanded(
             child:Container(
               alignment: Alignment.topCenter,
-            child: _messageContainer(),
+              child: _messageContainer(),
             ),
           ),
           Container(
-            child:(currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532')
-                ? _bottomContainer()
-                : _bottomContainer2()
+              child: _bottomContainer2(),
           ),
         ],
       ),
