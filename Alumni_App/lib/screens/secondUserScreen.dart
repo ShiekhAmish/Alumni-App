@@ -5,7 +5,7 @@ import 'package:alumni/screens/auxScreens/postCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class SecondUserProfilePage extends StatefulWidget {
   final DocumentSnapshot qds;
   SecondUserProfilePage(this.qds);
@@ -17,7 +17,11 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
   List<QueryDocumentSnapshot> _list = [];
   FirebaseRepos _repositories = new FirebaseRepos();
 
+
+
+  User currentUser;
   initState() {
+    currentUser = _repository.getCurrentUser();
     _repositories
         .getUserPosts(widget.qds.data()['uid'])
         .then((List<QueryDocumentSnapshot> list) {
@@ -28,7 +32,39 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
 
     super.initState();
   }
+  QueryDocumentSnapshot qds;
+  _SecondUserProfilePageState(this.qds);
+  FirebaseRepos _repository = new FirebaseRepos();
+  Future _showDialog() {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Delete User"),
+          content: Text("Are you sure to delete the User?"),
+          actions: [
+            FlatButton(
+                onPressed: () {
+                  _repository.deleteUser(qds.data()['uid']).then((value) {
+                    setState(() {
+                      qds = null;
+                    });
 
+                    Navigator.of(context).pop();
+                  });
+                },
+                child: Text("Yes")),
+            FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("No")),
+          ],
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     _appbar() {
@@ -38,23 +74,57 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
         centerTitle: true,
         backgroundColor: Color(0xff272c35),
         actions: [
-          IconButton(
-            icon: Icon(Icons.chat, color: Colors.white),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChatScreen(widget.qds),
-                  ),
-                );
-              
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.delete, color: Colors.white),
-            onPressed: () {
-              _showDialog();
-            },
+          Container(
+              child:(currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532')
+                  ?
+      IconButton(
+        icon: Icon(Icons.chat, color: Colors.white),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatScreen(widget.qds),
+            ),
+          );
+
+        },
+      )
+      //         Container(
+      //   child: Row(
+      //     children: [
+      //       IconButton(
+      //         icon: Icon(Icons.chat, color: Colors.white),
+      //         onPressed: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(
+      //               builder: (context) => ChatScreen(widget.qds),
+      //             ),
+      //           );
+      //
+      //         },
+      //       ),
+      //       IconButton(
+      //         icon: Icon(Icons.delete, color: Colors.white),
+      //         onPressed: () {
+      //           _showDialog();
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // )
+                  : IconButton(
+                icon: Icon(Icons.chat, color: Colors.white),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatScreen(widget.qds),
+                    ),
+                  );
+
+                },
+              ),
           ),
         ],
       );

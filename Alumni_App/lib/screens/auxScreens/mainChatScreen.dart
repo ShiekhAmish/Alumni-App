@@ -113,7 +113,7 @@ class _ChatScreenState extends State<ChatScreen> {
       height: 60,
       width: MediaQuery.of(context).size.width,
       color: UniversalVariables.separatorColor,
-      child: Row(
+      child:(widget.qds.data()['uid']=='yCjrM2pXVNd7kpuY9SndSesPo532')? Row(
         children: [
           Expanded(
             child: Container(
@@ -168,7 +168,30 @@ class _ChatScreenState extends State<ChatScreen> {
             },
           ),
         ],
-      ),
+      ): Container(
+    margin: EdgeInsets.only(
+    left: 10,
+    right:10,
+    bottom: 10
+    ),
+    height: 60,
+    width: MediaQuery.of(context).size.width,
+    color: UniversalVariables.separatorColor,
+    child: Row(
+    children: [
+    Expanded(
+    child: Container(
+    margin: EdgeInsets.symmetric(vertical: 5),
+    child: Text('Only You Send Message to ADMIN', textAlign: TextAlign.center,
+    style: TextStyle(color: Colors.grey),
+    ),
+
+    ),
+    ),
+
+    ],
+    ),
+    ),
     );
   }
   _messageContainer() {
