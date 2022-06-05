@@ -182,7 +182,7 @@ class _ChatScreenState extends State<ChatScreen> {
     Expanded(
     child: Container(
     margin: EdgeInsets.symmetric(vertical: 5),
-    child: Text('Only You Send Message to ADMIN', textAlign: TextAlign.center,
+    child: Text('Only You can Send Message to ADMIN', textAlign: TextAlign.center,
     style: TextStyle(color: Colors.grey),
     ),
 

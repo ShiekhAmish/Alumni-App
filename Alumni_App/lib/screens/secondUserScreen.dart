@@ -77,42 +77,30 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
           Container(
               child:(currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532')
                   ?
-      IconButton(
-        icon: Icon(Icons.chat, color: Colors.white),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChatScreen(widget.qds),
-            ),
-          );
+              Container(
+        child: Row(
+          children: [
+            IconButton(
+              icon: Icon(Icons.chat, color: Colors.white),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChatScreen(widget.qds),
+                  ),
+                );
 
-        },
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.delete, color: Colors.white),
+              onPressed: () {
+                _showDialog();
+              },
+            ),
+          ],
+        ),
       )
-      //         Container(
-      //   child: Row(
-      //     children: [
-      //       IconButton(
-      //         icon: Icon(Icons.chat, color: Colors.white),
-      //         onPressed: () {
-      //           Navigator.push(
-      //             context,
-      //             MaterialPageRoute(
-      //               builder: (context) => ChatScreen(widget.qds),
-      //             ),
-      //           );
-      //
-      //         },
-      //       ),
-      //       IconButton(
-      //         icon: Icon(Icons.delete, color: Colors.white),
-      //         onPressed: () {
-      //           _showDialog();
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // )
                   : IconButton(
                 icon: Icon(Icons.chat, color: Colors.white),
                 onPressed: () {
