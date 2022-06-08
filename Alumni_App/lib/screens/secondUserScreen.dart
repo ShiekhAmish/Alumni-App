@@ -17,11 +17,18 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
   List<QueryDocumentSnapshot> _list = [];
   FirebaseRepos _repositories = new FirebaseRepos();
 
-
-
+  String SubAdmin;
+  DocumentSnapshot userData;
   User currentUser;
+
   initState() {
+
     currentUser = _repository.getCurrentUser();
+    _repositories.getCurrentUserData().then((data) {
+      setState(() {
+       userData = data;
+       SubAdmin=userData.data()['SubAdmin'].toString().toUpperCase();
+      });});
     _repositories
         .getUserPosts(widget.qds.data()['uid'])
         .then((List<QueryDocumentSnapshot> list) {
@@ -32,9 +39,11 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
 
     super.initState();
   }
+
   QueryDocumentSnapshot qds;
   _SecondUserProfilePageState(this.qds);
   FirebaseRepos _repository = new FirebaseRepos();
+  FirebaseRepos _repositorySubAdmin = new FirebaseRepos();
   Future _showDialog() {
     return showDialog(
       barrierDismissible: false,
@@ -65,6 +74,47 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
       },
     );
   }
+  Future _showDialogSubAdmin() {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Sub Admin"),
+          content: Text("Are you sure to add or Remove Sub Admin?"),
+          actions: [
+            FlatButton(
+                onPressed: () {
+                  _repositorySubAdmin.updateUserInfo2(qds.data()['uid'], 'SUB').then((value) {
+                    setState(() {
+
+                    });
+
+                    Navigator.of(context).pop();
+                  });
+                },
+                child: Text("Yes")),
+            FlatButton(
+                onPressed: () {
+                  _repositorySubAdmin.updateUserInfo2(qds.data()['uid'], 'UNSUB').then((value) {
+                    setState(() {
+
+                    });
+
+                    Navigator.of(context).pop();
+                  });
+                },
+                child: Text("REMOVE")),
+            FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("No")),
+          ],
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     _appbar() {
@@ -75,32 +125,65 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
         backgroundColor: Color(0xff272c35),
         actions: [
           Container(
-              child:(currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532')
+              child:(currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532' ||  SubAdmin=='SUB')
                   ?
               Container(
-        child: Row(
-          children: [
-            IconButton(
-              icon: Icon(Icons.chat, color: Colors.white),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChatScreen(widget.qds),
-                  ),
-                );
+                  child:(currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532' )?
+                  Container(
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.person_add_alt_1_sharp, color: Colors.white),
+                          onPressed: () {
+                            _showDialogSubAdmin();
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete, color: Colors.white),
+                          onPressed: () {
+                            _showDialog();
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.chat, color: Colors.white),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChatScreen(widget.qds),
+                              ),
+                            );
 
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.delete, color: Colors.white),
-              onPressed: () {
-                _showDialog();
-              },
-            ),
-          ],
-        ),
-      )
+                          },
+                        ),
+
+
+                      ],
+                    ),
+                  ):
+                  Container(
+                    child: Row(
+                      children: [
+
+                        IconButton(
+                          icon: Icon(Icons.chat, color: Colors.white),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChatScreen(widget.qds),
+                              ),
+                            );
+
+                          },
+                        ),
+
+
+                      ],
+                    ),
+                  )
+
+              )
                   : IconButton(
                 icon: Icon(Icons.chat, color: Colors.white),
                 onPressed: () {

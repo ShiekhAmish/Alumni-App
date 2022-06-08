@@ -42,6 +42,7 @@ class FirebaseRepos
 
    Future<void> updateUserInfo(String name, String course, String branch,
       String rollNumber, String tag, String start, String end) =>_methods.updateUserInfo(name, course, branch, rollNumber, tag, start, end);
+  Future<void> updateUserInfo2(String uid,String name) =>_methods.updateUserInfo2(uid, name);
 
   Future<void>signOut()=>_methods.signOut();
   Future<bool> verifyEmail(String otp)=>_methods.verifyEmail(otp);

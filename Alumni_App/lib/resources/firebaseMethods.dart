@@ -207,7 +207,13 @@ class FirebaseMethods {
       'endingYear': end,
     });
   }
+  Future<void> updateUserInfo2(String uid,String SubAdmin ) async {
+    return firestore.collection('users').doc(uid).update({
 
+      'SubAdmin': SubAdmin,
+
+    });
+  }
   Future<void> signOut() async {
     return await _auth.signOut();
   }

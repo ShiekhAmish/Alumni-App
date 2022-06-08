@@ -14,11 +14,18 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   FirebaseRepos _repository = FirebaseRepos();
+  FirebaseRepos _repositories = new FirebaseRepos();
   TextEditingController _controller = new TextEditingController();
-
+  String SubAdmin;
+  DocumentSnapshot userData;
   User currentUser;
 
   initState() {
+    _repositories.getCurrentUserData().then((data) {
+      setState(() {
+        userData = data;
+        SubAdmin=userData.data()['SubAdmin'].toString().toUpperCase();
+      });});
     currentUser = _repository.getCurrentUser();
     super.initState();
   }
@@ -113,7 +120,7 @@ class _ChatScreenState extends State<ChatScreen> {
       height: 60,
       width: MediaQuery.of(context).size.width,
       color: UniversalVariables.separatorColor,
-      child:(widget.qds.data()['uid']=='yCjrM2pXVNd7kpuY9SndSesPo532')? Row(
+      child:(widget.qds.data()['uid']=='yCjrM2pXVNd7kpuY9SndSesPo532' || SubAdmin=='SUB')? Row(
         children: [
           Expanded(
             child: Container(

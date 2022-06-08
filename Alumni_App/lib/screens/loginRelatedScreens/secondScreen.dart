@@ -247,6 +247,7 @@ class _SecondScreenState extends State<SecondScreen> {
                                 branch: _branch.text.toUpperCase(),
                                 username: (_name.text).split(" ")[0],
                                 chattingPartners: [],
+                                SubAdmin: 'UNSUB',
                               );
 
                               _repository
