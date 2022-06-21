@@ -41,7 +41,7 @@ class FirebaseRepos
    Future<void> addMessage(String sender, String receiver, Message message)=>_methods.addMessage(sender, receiver, message);
 
    Future<void> updateUserInfo(String name, String course, String branch,
-      String rollNumber, String tag, String start, String end) =>_methods.updateUserInfo(name, course, branch, rollNumber, tag, start, end);
+      String rollNumber, String tag, String start, String end, String number) =>_methods.updateUserInfo(name, course, branch, rollNumber, tag, start, end, number);
   Future<void> updateUserInfo2(String uid,String name) =>_methods.updateUserInfo2(uid, name);
 
   Future<void>signOut()=>_methods.signOut();

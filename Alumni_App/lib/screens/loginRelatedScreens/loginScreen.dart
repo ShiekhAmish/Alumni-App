@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:email_validator/email_validator.dart';
-
+import 'package:alumni/screens/reset_password.dart';
 class LogIn extends StatefulWidget {
   @override
   _LogInState createState() => _LogInState();
@@ -126,8 +126,9 @@ class _LogInState extends State<LogIn> {
                                 },
                               ),
                               SizedBox(
-                                height: 15,
+                                height: 10,
                               ),
+                              forgetPassword(context),
                               RaisedButton(
                                 color: Colors.lightBlue,
                                 child: Text(
@@ -286,4 +287,18 @@ class _LogInState extends State<LogIn> {
       ),
     );
   }
+  Widget forgetPassword(BuildContext context)
+  {
+    return Container(width: MediaQuery.of(context).size.width,
+    height: 35,
+    alignment: Alignment.bottomRight,
+    child: TextButton(
+      child:
+      Text("Forgot Password?",style: TextStyle(color: Colors.white),textAlign: TextAlign.right,),
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> ResetPassword())),
+
+      ),
+    );
+  }
+
 }

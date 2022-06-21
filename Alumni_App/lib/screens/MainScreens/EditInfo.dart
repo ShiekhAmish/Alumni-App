@@ -2,7 +2,8 @@ import 'package:alumni/modals.dart/universalVariables.dart';
 import 'package:alumni/resources/firebaseRepos.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'package:alumni/screens/auxScreens/userview.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 class EditInfo extends StatefulWidget {
   @override
   _EditInfoState createState() => _EditInfoState();
@@ -17,15 +18,17 @@ class _EditInfoState extends State<EditInfo> {
   TextEditingController _endingYear;
   TextEditingController _tag;
   TextEditingController _branch;
+  TextEditingController _number;
   FirebaseRepos _repository = FirebaseRepos();
   bool _shouldIRotate;
   DocumentSnapshot currentUserData;
-
+  User currentUser;
   int currentYear;
   @override
   void initState() {
     currentYear = DateTime.now().year;
     _shouldIRotate = false;
+    currentUser = _repository.getCurrentUser();
     _repository.getCurrentUserData().then((value) {
       setState(() {
         currentUserData = value;
@@ -39,6 +42,7 @@ class _EditInfoState extends State<EditInfo> {
             TextEditingController(text: currentUserData.data()['endingYear']);
         _tag = TextEditingController(text: currentUserData.data()['tag']);
         _branch = TextEditingController(text: currentUserData.data()['branch']);
+        _number=TextEditingController(text: currentUserData.data()['Number']);
       });
     });
     super.initState();
@@ -57,6 +61,7 @@ class _EditInfoState extends State<EditInfo> {
           style: TextStyle(color: Colors.white, fontSize: 23),
         ),
         elevation: 0,
+
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -169,6 +174,28 @@ class _EditInfoState extends State<EditInfo> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
+                        controller: _number,
+                        keyboardType: TextInputType.number,
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        validator: (value) {
+                          if (_number.text.length < 11)
+                            return "Enter a Valid Number";
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          hintText: "Contact #",
+                          hintStyle:
+                          TextStyle(fontSize: 16, color: Colors.grey[900]),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: EdgeInsets.all(10),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.lightBlue)),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
                         controller: _tag,
                         readOnly: true,
                         keyboardType: TextInputType.text,
@@ -245,35 +272,98 @@ class _EditInfoState extends State<EditInfo> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      RaisedButton(
-                        color: Colors.lightBlue,
-                        child: Text(
-                          "Save",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            setState(() {
-                              _shouldIRotate = true;
-                            });
+                  Container(
+                    child:(currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532' )
+                        ?
+                    Container(
 
-                            _repository
-                                .updateUserInfo(
-                                    _name.text,
-                                    _course.text,
-                                    _branch.text,
-                                    _rollNumber.text,
-                                    _tag.text,
-                                    _startingYear.text,
-                                    _endingYear.text)
-                                .then((value) {
-                              setState(() {
-                                _shouldIRotate = false;
-                              });
-                            });
-                          }
-                        },
-                      ),
+                        child: Column(
+                          children: [
+                            RaisedButton(
+                              color: Colors.lightBlue,
+                              child: Text(
+                                "Save",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              onPressed: () {
+                                if (_formKey.currentState.validate()) {
+                                  setState(() {
+                                    _shouldIRotate = true;
+                                  });
+
+                                  _repository
+                                      .updateUserInfo(
+                                      _name.text,
+                                      _course.text,
+                                      _branch.text,
+                                      _rollNumber.text,
+                                      _tag.text,
+                                      _startingYear.text,
+                                      _endingYear.text,
+                                    _number.text,)
+                                      .then((value) {
+                                    setState(() {
+                                      _shouldIRotate = false;
+                                    });
+                                  });
+                                }
+                              },
+                            ),
+                            RaisedButton(
+                              color: Colors.lightBlue,
+                              child: Text(
+                                "Update Users",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              onPressed: () {
+
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => ViewPage()),
+                                  );
+
+                              },
+                            ),
+                          ],
+                        ),
+                      ):
+                        Container(
+                          child: Column(
+                            children: [
+                              RaisedButton(
+                                color: Colors.lightBlue,
+                                child: Text(
+                                  "Save",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState.validate()) {
+                                    setState(() {
+                                      _shouldIRotate = true;
+                                    });
+
+                                    _repository
+                                        .updateUserInfo(
+                                      _name.text,
+                                      _course.text,
+                                      _branch.text,
+                                      _rollNumber.text,
+                                      _tag.text,
+                                      _startingYear.text,
+                                      _endingYear.text,
+                                      _number.text,)
+                                        .then((value) {
+                                      setState(() {
+                                        _shouldIRotate = false;
+                                      });
+                                    });
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                  ),
                     ],
                   ),
                 ),

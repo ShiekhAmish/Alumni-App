@@ -10,6 +10,7 @@ class MyUser {
   String startingYear;
   String endingYear;
   String SubAdmin;
+  String Number;
   List<String> chattingPartners;
 
   MyUser({
@@ -24,7 +25,8 @@ class MyUser {
     this.endingYear,
     this.startingYear,
     this.chattingPartners,
-    this.SubAdmin
+    this.SubAdmin,
+    this.Number,
   });
 
   Map toMap(MyUser myUser) {
@@ -41,6 +43,7 @@ class MyUser {
     data["endingYear"]=myUser.endingYear;
     data["chattingPartners"]=myUser.chattingPartners;
     data["SubAdmin"]=myUser.SubAdmin;
+    data["Number"]=myUser.Number;
     return data;
   }
 
@@ -57,5 +60,6 @@ class MyUser {
     this.endingYear=mapData["endingYear"];
     this.chattingPartners=mapData["chattingPartners"];
     this.SubAdmin=mapData["SubAdmin"];
+    this.Number=mapData["Number"];
   }
 }

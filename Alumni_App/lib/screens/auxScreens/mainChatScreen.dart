@@ -17,6 +17,7 @@ class _ChatScreenState extends State<ChatScreen> {
   FirebaseRepos _repositories = new FirebaseRepos();
   TextEditingController _controller = new TextEditingController();
   String SubAdmin;
+  String SubUID;
   DocumentSnapshot userData;
   User currentUser;
 
@@ -25,6 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
       setState(() {
         userData = data;
         SubAdmin=userData.data()['SubAdmin'].toString().toUpperCase();
+        SubUID=userData.data()['uid'].toString().toUpperCase();
       });});
     currentUser = _repository.getCurrentUser();
     super.initState();
@@ -120,7 +122,7 @@ class _ChatScreenState extends State<ChatScreen> {
       height: 60,
       width: MediaQuery.of(context).size.width,
       color: UniversalVariables.separatorColor,
-      child:(widget.qds.data()['uid']=='yCjrM2pXVNd7kpuY9SndSesPo532' || SubAdmin=='SUB')? Row(
+      child:(widget.qds.data()['uid']=='yCjrM2pXVNd7kpuY9SndSesPo532' || widget.qds.data()['SubAdmin']=='SUB')? Row(
         children: [
           Expanded(
             child: Container(
@@ -166,7 +168,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   _repository.getCurrentUser().uid,
                   Message(
                       date: DateTime.now(),
-                      receiverId: widget.qds.data()['yCjrM2pXVNd7kpuY9SndSesPo532'],
+                      receiverId: SubUID,
                       senderId: currentUser.uid,
                       text: _text),
                 );
@@ -294,7 +296,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           Container(
-            child:(currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532')
+            child:(currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532'|| SubAdmin=='SUB')
                 ? _bottomContainer()
                 : _bottomContainer2()
           ),

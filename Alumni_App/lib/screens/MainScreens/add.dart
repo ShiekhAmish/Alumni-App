@@ -23,10 +23,17 @@ class _AddPostState extends State<AddPost> {
   FirebaseRepos _repository = FirebaseRepos();
   bool shouldIRotate;
   String imgUrl;
+  String SubAdmin;
+  DocumentSnapshot userData;
   var uid;
 
   initState() {
     currentUser = _repository.getCurrentUser();
+    _repository.getCurrentUserData().then((data) {
+      setState(() {
+        userData = data;
+        SubAdmin=userData.data()['SubAdmin'].toString().toUpperCase();
+      });});
     _picker = ImagePicker();
     shouldIRotate = false;
     uid = Uuid();
@@ -258,7 +265,7 @@ adminpost()
         children: [
          Column(
              children: [
-               (currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532')
+               (currentUser.uid=='yCjrM2pXVNd7kpuY9SndSesPo532'||  SubAdmin=='SUB')
                    ? adminpost()
                    : notpost(),
              ],

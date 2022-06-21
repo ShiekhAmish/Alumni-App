@@ -196,13 +196,14 @@ class FirebaseMethods {
   }
 
   Future<void> updateUserInfo(String name, String course, String branch,
-      String rollNumber, String tag, String start, String end) async {
+      String rollNumber, String tag, String start, String end,String number) async {
     return firestore.collection('users').doc(getCurrentUser().uid).update({
       'name': name,
       'tag': tag,
       'course': course,
       'branch': branch,
       'rollNumber': rollNumber,
+      'Number': number,
       'startingYear': start,
       'endingYear': end,
     });

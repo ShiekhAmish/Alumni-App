@@ -24,6 +24,7 @@ class _SecondScreenState extends State<SecondScreen> {
   TextEditingController _endingYear = TextEditingController();
   TextEditingController _tag = TextEditingController();
   TextEditingController _branch = TextEditingController();
+  TextEditingController _number = TextEditingController();
   FirebaseRepos _repository = FirebaseRepos();
   bool _shouldIRotate;
 
@@ -148,6 +149,28 @@ class _SecondScreenState extends State<SecondScreen> {
                     ),
                     SizedBox(height: 20),
                     TextFormField(
+                      controller: _number,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      validator: (value) {
+                        if (_number.text.length < 11)
+                          return "Enter a Valid Number";
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Contact #",
+                        hintStyle:
+                        TextStyle(fontSize: 16, color: Colors.grey[900]),
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(10),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.lightBlue)),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    TextFormField(
                       controller: _tag,
                       keyboardType: TextInputType.text,
                       style: TextStyle(fontSize: 16, color: Colors.black),
@@ -241,6 +264,7 @@ class _SecondScreenState extends State<SecondScreen> {
                                 email: widget.email,
                                 endingYear: _endingYear.text,
                                 rollNumber: _rollNumber.text,
+                                Number: _number.text,
                                 startingYear: _startingYear.text,
                                 uid: currentUser.uid,
                                 tag: _tag.text.toUpperCase(),

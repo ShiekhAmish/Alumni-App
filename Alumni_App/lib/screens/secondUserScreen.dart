@@ -18,12 +18,14 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
   FirebaseRepos _repositories = new FirebaseRepos();
 
   String SubAdmin;
+  String SubAdmin2;
   DocumentSnapshot userData;
   User currentUser;
 
   initState() {
 
     currentUser = _repository.getCurrentUser();
+    SubAdmin2=widget.qds.data()['SubAdmin'].toString().toUpperCase();
     _repositories.getCurrentUserData().then((data) {
       setState(() {
        userData = data;
@@ -241,6 +243,45 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
+            SizedBox(height: 10),
+
+      Container(
+      child:(SubAdmin2=='SUB' )
+      ?
+      Container(
+        child: Column(
+          children: [
+            Container(
+                child:(widget.qds.data()['uid'].toString()=='yCjrM2pXVNd7kpuY9SndSesPo532' )
+                    ?
+                Container(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Text(
+                          'ADMIN',
+                          style: TextStyle(color: Colors.white, fontSize: 24),
+                        ),
+                      ),
+                    ],
+                  ),
+                ):Container(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Text(
+                          'SubAdmin',
+                          style: TextStyle(color: Colors.white, fontSize: 24),
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+          ],
+        ),
+      ):Container()),
             Container(
               width: MediaQuery.of(context).size.width,
               child: Text(
