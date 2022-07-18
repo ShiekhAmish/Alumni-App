@@ -27,7 +27,7 @@ class OtpScreenState extends State<OtpScreen> {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 18),
                 child: Text(
-                  "We have sent you an email, Authenticate by clicking the link and then continue...",
+                  "We have sent you an email (Also, Check Email in Spam if You have not Found in your Inbox), Authenticate by clicking the link and then continue...",
                   style: TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,

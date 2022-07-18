@@ -32,7 +32,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 _smallList = _list
                     .where((element) =>
                         (element.data()['name'].toString().toUpperCase())
-                            .contains(_controller.text.toUpperCase()) ||
+                            .contains(_controller.text.toUpperCase())||
+                            (element.data()['Skill'].toString().toUpperCase())
+                                .contains(_controller.text.toUpperCase()) ||
                         (element.data()['rollNumber'].toString().toUpperCase())
                             .contains(_controller.text.toUpperCase()) ||
                     (element.data()['branch'].toString().toUpperCase())

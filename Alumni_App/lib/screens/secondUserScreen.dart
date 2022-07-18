@@ -244,6 +244,14 @@ class _SecondUserProfilePageState extends State<SecondUserProfilePage> {
               ),
             ),
             SizedBox(height: 10),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Text(
+                widget.qds.data()['Skill'].toString().toUpperCase(),
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
+            SizedBox(height: 10),
 
       Container(
       child:(SubAdmin2=='SUB' )

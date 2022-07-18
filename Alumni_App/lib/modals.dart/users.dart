@@ -11,6 +11,7 @@ class MyUser {
   String endingYear;
   String SubAdmin;
   String Number;
+  String skill;
   List<String> chattingPartners;
 
   MyUser({
@@ -27,6 +28,7 @@ class MyUser {
     this.chattingPartners,
     this.SubAdmin,
     this.Number,
+    this.skill,
   });
 
   Map toMap(MyUser myUser) {
@@ -44,6 +46,7 @@ class MyUser {
     data["chattingPartners"]=myUser.chattingPartners;
     data["SubAdmin"]=myUser.SubAdmin;
     data["Number"]=myUser.Number;
+    data["Skill"]=myUser.skill;
     return data;
   }
 
@@ -61,5 +64,6 @@ class MyUser {
     this.chattingPartners=mapData["chattingPartners"];
     this.SubAdmin=mapData["SubAdmin"];
     this.Number=mapData["Number"];
+    this.skill=mapData["Skill"];
   }
 }

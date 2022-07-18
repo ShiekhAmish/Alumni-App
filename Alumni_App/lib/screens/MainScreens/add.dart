@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../resources/firebaseRepos.dart';
 import 'package:uuid/uuid.dart';
-
+import 'dart:async';
 class AddPost extends StatefulWidget {
   @override
   _AddPostState createState() => _AddPostState();

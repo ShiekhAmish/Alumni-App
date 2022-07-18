@@ -134,7 +134,7 @@ class _EditInfoState extends State<EditInfo> {
                           fontWeight: FontWeight.bold,
                         ),
                         validator: (value) {
-                          if (_branch.text.length < 3)
+                          if (_branch.text.length < 2)
                             return "branch name must be atleast 2 characters long";
                           return null;
                         },
